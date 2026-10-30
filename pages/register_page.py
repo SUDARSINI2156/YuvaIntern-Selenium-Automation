@@ -17,39 +17,37 @@ class RegisterPage:
     def __init__(self, driver):
 
         self.driver = driver
-
         self.wait = WebDriverWait(driver, 10)
 
     def open_page(self, url):
-
         self.driver.get(url)
 
     def enter_name(self, name):
-
-        self.driver.find_element(*self.NAME).send_keys(name)
+        self.wait.until(
+            EC.visibility_of_element_located(self.NAME)
+        ).send_keys(name)
 
     def enter_email(self, email):
-
-        self.driver.find_element(*self.EMAIL).send_keys(email)
+        self.wait.until(
+            EC.visibility_of_element_located(self.EMAIL)
+        ).send_keys(email)
 
     def enter_password(self, password):
-
-        self.driver.find_element(*self.PASSWORD).send_keys(password)
+        self.wait.until(
+            EC.visibility_of_element_located(self.PASSWORD)
+        ).send_keys(password)
 
     def enter_confirm_password(self, password):
-
-        self.driver.find_element(
-            *self.CONFIRM_PASSWORD
+        self.wait.until(
+            EC.visibility_of_element_located(self.CONFIRM_PASSWORD)
         ).send_keys(password)
 
     def click_register(self):
-
-        self.driver.find_element(
-            *self.REGISTER_BUTTON
+        self.wait.until(
+            EC.element_to_be_clickable(self.REGISTER_BUTTON)
         ).click()
 
     def get_message(self):
-
         return self.wait.until(
             EC.visibility_of_element_located(self.MESSAGE)
         ).text
